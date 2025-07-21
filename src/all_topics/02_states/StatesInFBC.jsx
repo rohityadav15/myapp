@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 const StatesInFBC = () => {
-  let [state, setState] = useState("Hello World"); // ["Hello" , func]
+  let [state, setState] = useState("Hello"); // [ud,func]
 
-  const handleState = () => {
-    setState("Byee World")
-  }
+  const stateHandle = () => {
+    setState("Byyeee");
+  };
 
   return (
     <div>
-      <h1>Learn States in FBC {state}</h1>
-
-      <button onClick={handleState}>update state</button>
+      <h1>States In FBC {state}</h1>
+      <button onClick={stateHandle}>click</button>
     </div>
   );
 };
+
 export default StatesInFBC;
