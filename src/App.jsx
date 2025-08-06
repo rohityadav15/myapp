@@ -23,6 +23,7 @@ import LifeCyclePerent from "./all_topics/12_lifeCycle/LifeCyclePerent";
 import FetchAPI from "./all_topics/13_fetch/FetchAPI";
 import FetchCountries from "./all_topics/13_fetch/fetchCountries";
 import FetchTask from "./all_topics/13_fetch/FetchTask";
+import Flags from "./all_topics/14_customHooks/Flags";
 
 const App = () => {
   return (
@@ -51,7 +52,8 @@ const App = () => {
       {/* <FetchAPI/> */}
       {/* <FetchCountries/> */}
 
-      <FetchTask/>
+      {/* <FetchTask/> */}
+      <Flags/>
     </>
   );
 };
