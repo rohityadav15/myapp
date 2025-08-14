@@ -7,11 +7,18 @@ const FetchTask = () => {
 
   //To store API data
   const [allCountriesData, setAllCountriesData] = useState([]);
-  const [allStatesData, setAllStatesData]=useState([])
+  const [allStatesData, setAllStatesData] = useState([]);
+  const [allCities, setAllCities] = useState([]);
 
   // to enable / disable select tag
   const [isStateDisable, setIsStateDisable] = useState(true);
   const [isCityDisable, setIsCityDisable] = useState(true);
+
+  const [userData , setUserData]= useState({
+    country:"",
+    state:"",
+    city:"",
+  })
 
   useEffect(() => {
     async function getAllCountries() {
@@ -32,11 +39,33 @@ const FetchTask = () => {
         `https://crio-location-selector.onrender.com/country=${selectedCountry}/states`
       );
       let stateData = await resp.json();
-      console.log(stateData)
-      setAllStatesData(stateData)
+      console.log(stateData);
+      setAllStatesData(stateData);
     }
     getAllState();
   }, [selectedCountry]);
+
+  useEffect(() => {
+    if (!selectedState) return;
+    setIsCityDisable(fales);
+    async function getAllcities() {
+      let resp = await fetch(
+        `https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`
+      );
+      let cityData = await resp.json();
+      setAllCities(cityData);
+    }
+    getAllcities();
+  }, [selectedState]);
+
+  useEffect(()=>{
+    if(!selectedCity) return
+    setUserData({
+      country:selectedCountry,
+      state:selectedState,
+      city: selectedCity,
+    })
+  },[])
   return (
     <div>
       <h1>FetchTAsk -1</h1>
@@ -82,8 +111,16 @@ const FetchTask = () => {
           disabled={isCityDisable}
         >
           <option>Select City</option>
+          {allCities.map((cityName, idx) => {
+            return (
+              <option value={cityName} key={idx}>
+                {cityName}
+              </option>
+            );
+          })}
         </select>
       </section>
+      {!selectedCity ? null :<h1>Country:{userData.country} State: :{userData.state} City:{userData.city} </h1>}
     </div>
   );
 };
